@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Attachment =require('./Attachment.js');
 const Comment=require('./Comment.js');
+var Schema = mongoose.Schema;
 
-
-const Post = mongoose.model('Post',{ 
+const Post = new Schema({ 
     author: { type: String,required:true },
     post:{type:String,required:true},
     mentions:{type:Array},
@@ -19,5 +19,4 @@ const Post = mongoose.model('Post',{
     hashtags:{type:Array},
 });
 
-
-module.exports = {Post}; 
+module.exports ={Post}; 

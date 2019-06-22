@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const Comments =require('Comment.js')  
+const Comments =require('./Comment.js') 
+var Schema = mongoose.Schema;
 
-const Attachment = mongoose.model('Post',{ 
+
+const Attachment = new Schema({ 
     author: { type: String,required:true },
     parent_id :{type:String},
     likes:{type:Number,default:0},
