@@ -1,21 +1,19 @@
 const mongoose = require('mongoose');
-const Attachment =require('./Attachment.js');
-const Comment=require('./Comment.js');
 var Schema = mongoose.Schema;
 
-const Post = new Schema({ 
+var Post = mongoose.model('Post',{ 
     author: { type: String,required:true },
     post:{type:String,required:true},
     mentions:{type:Array},
-    created_time:{type:Date,required:true,default:Date.now()},
-    updated_time:{type:Date,required:true,default:Date.now()},
+    created_time:{type:Date,required:true,default:Date.now},
+    updated_time:{type:Date,required:true,default:Date.now},
     privacy:{type:String,required:true,default:'private'},
     likes:{type:Number,default:0},
     dislikes:{type:Number,default:0},
     shares:{type:Number,default:0},
-    comments:[Comment],
+    comments:{type:Array,default:[]},
     location:{type:String,required:true},
-    media_attachments :[Attachment],
+    media_attachments :{type:Array,default:[]},
     hashtags:{type:Array},
 });
 

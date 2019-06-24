@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 const Comment = new Schema({ 
     author: { type: String,required:true },
     parent_id:{type:String},
+    parent_type:{type:String},
     comment:{type:String,required:true},
     mentions:{type:Array},
     created_date:{type:Date,required:true,default:Date.now()},
