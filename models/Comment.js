@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-const Comment = new Schema({ 
+const Comment = mongoose.model('Comment',{ 
     author: { type: String,required:true },
     parent_id:{type:String},
     parent_type:{type:String},
@@ -13,6 +13,7 @@ const Comment = new Schema({
     dislikes:{type:Number,default:0},
     media_attachments :{type:Array},
     hashtags:{type:Array},
+    location:{type:String},
     can_comment:{type:Boolean,default:true},
 });
 
