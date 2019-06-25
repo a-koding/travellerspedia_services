@@ -1,5 +1,6 @@
 const express =require('express');
-var {Post} =require('../models/Post.js')
+var {Post} =require('../models/Post.js');
+var {Comment} =require('../models/Comment.js');
 var router = express.Router();
 
 
@@ -45,5 +46,31 @@ router.post('/:post_id',function(req,res){
                res.status(200).send({'Status':'Error'});
      });
   });
+
+  router.get('/:post_id',function(req,res){
+     Post.findOne({_id:req.params.post_id},function(err,post){
+     var result={};
+     if(post){
+          result.id=post.id;
+          result.post=post.post;
+          result.privacy=post.privacy;
+          result.attachments=post.media_attachments;
+          result.mentions=post.mentions;
+          result.likes=post.likes;
+          result.dislikes=post.dislikes;
+          result.comments=[]
+          Comment.find({'_id':{ $in : post.comment }},function(err,comments){
+               if(!err)
+               console.log(comments)
+          });
+          res.status(200).send({'Status':'Success','post':result});
+     }
+     else
+     res.status(200).send({'Status':'Error'});
+  });
+  
+
+});
+
 
 module.exports=router;

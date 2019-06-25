@@ -6,6 +6,7 @@ var Post = mongoose.model('Post',{
     mentions:{type:Array},
     created_time:{type:Date},
     updated_time:{type:Date},
+    post:{type:String,required:true},
     privacy:{type:String,required:true,default:'private'},
     likes:{type:Number,default:0},
     liked_by:{type:Array,default:[]},
