@@ -60,10 +60,28 @@ router.post('/:post_id',function(req,res){
           result.dislikes=post.dislikes;
           result.comments=[]
           Comment.find({'_id':{ $in : post.comment }},function(err,comments){
-               if(!err)
-               console.log(comments)
+               if(!err){
+               for(var i in comments){
+                    //console.log(comments[i])
+                    var comment_obj={}
+                    comment_obj.id=comments[i]._id;
+                    comment_obj.comment=comments[i].comment;
+                    comment_obj.mentions=comments[i].mentions;
+                    comment_obj.likes=comments[i].likes;
+                    comment_obj.dislikes=comments[i].dislikes;
+                    comment_obj.attachments=comments[i].media_attachments;
+                    comment_obj.hashtags=comments[i].hashtags;
+                    comment_obj.location=comments[i].location;
+                    comment_obj.can_comment=comments[i].can_comment;
+                    comment_obj.user=comments[i].author;
+                    result.comments.push(comment_obj)
+                    console.log(result)
+               }
+               res.status(200).send({'Status':'Success','post':result});
+          }
+          else
+          res.status(200).send({'Status':'Error'});
           });
-          res.status(200).send({'Status':'Success','post':result});
      }
      else
      res.status(200).send({'Status':'Error'});
