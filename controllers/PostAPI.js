@@ -24,7 +24,7 @@ router.post('/',function(req,res){
 });
 
 router.post('/:post_id',function(req,res){
-     Post.findOne({ _id:req.params.post_id },function(err,post){
+     Post.findOne({_id:req.params.post_id},function(err,post){
           if(post){
           post.author= req.body.user,
           post.post=req.body.post,

@@ -9,6 +9,7 @@ const Comment = mongoose.model('Comment',{
     comment:{type:String,required:true},
     mentions:{type:Array},
     created_date:{type:Date,required:true,default:Date.now()},
+    updated_date:{type:Date},
     likes:{type:Number,default:0},
     dislikes:{type:Number,default:0},
     media_attachments :{type:Array},
