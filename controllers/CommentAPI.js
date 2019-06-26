@@ -23,7 +23,7 @@ router.post('/',function(req,res){
                   console.log(post)
                   post.comment.push(comment.id);
                   post.save();
-                  res.status(200).send({'Status':'Success','id':comment.id});
+                  res.status(200).send({'Status':'Success','msg':'Success','id':comment.id});
                   return;
                  });
               }
@@ -47,7 +47,7 @@ router.post('/',function(req,res){
             comment.can_comment=req.body.can_comment;
             var type= req.body.parent_type;
             comment.save(function(err){
-            res.status(200).send({'Status':'Success','id':comment.id});
+            res.status(200).send({'Status':'Success','msg':'Success','id':comment.id});
             return;
             });
             }
@@ -56,5 +56,28 @@ router.post('/',function(req,res){
       });
 
    });
+
+   router.get('/:comment_id',function(req,res){
+      Comment.findOne({ _id:req.params.comment_id },function(err,comment){  
+             if(!err && comment){
+               var comment_obj={}
+               comment_obj.id=comment._id;
+               comment_obj.comment=comment.comment;
+               comment_obj.mentions=comment.mentions;
+               comment_obj.likes=comment.likes;
+               comment_obj.dislikes=comment.dislikes;
+               comment_obj.attachments=comment.media_attachments;
+               comment_obj.hashtags=comment.hashtags;
+               comment_obj.location=comment.location;
+               comment_obj.can_comment=comment.can_comment;
+               comment_obj.user=comment.author;
+               comment_obj.type='comment'
+               res.status(200).send({'Status':'Success','msg':'Success','comment':comment_obj});
+              }
+              else
+              res.status(200).send({'Status':'Error','msg':'Invalid Comment ID'});   
+        });
+  
+     });
 
    module.exports=router;

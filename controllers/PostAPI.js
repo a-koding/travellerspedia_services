@@ -75,7 +75,6 @@ router.post('/:post_id',function(req,res){
                     comment_obj.can_comment=comments[i].can_comment;
                     comment_obj.user=comments[i].author;
                     result.comments.push(comment_obj)
-                    console.log(result)
                }
                res.status(200).send({'Status':'Success','post':result});
           }
